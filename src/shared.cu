@@ -65,7 +65,7 @@ void print(Matrix X) {
 // Matrix multiplication - Host code
 // Matrix dimensions are assumed to be multiples of BLOCK_SIZE
 void MatMul(const Matrix A, const Matrix B, Matrix C) {
-// Load A and B to device memory
+	// Load A and B to device memory
 	Matrix d_A;
 	d_A.width = d_A.stride = A.width;
 	d_A.height = A.height;
@@ -96,6 +96,13 @@ void MatMul(const Matrix A, const Matrix B, Matrix C) {
 	cudaEventRecord(start);
 	MatMulKernel<<<dimGrid, dimBlock>>>(d_A, d_B, d_C);
 	cudaEventRecord(stop);
+
+	cudaError_t errSync = cudaGetLastError();
+	cudaError_t errAsync = cudaDeviceSynchronize();
+	if (errSync != cudaSuccess)
+		printf("4: Sync kernel error: %s\n", cudaGetErrorString(errSync));
+	if (errAsync != cudaSuccess)
+		printf("4: Async kernel error: %s\n", cudaGetErrorString(errAsync));
 
 	if (ELAPSED_TIME == 1) {
 		cudaEventSynchronize (stop);
