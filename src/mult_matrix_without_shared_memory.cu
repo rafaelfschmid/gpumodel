@@ -92,7 +92,8 @@ void MatMul(const Matrix A, const Matrix B, Matrix C) {
 int main() {
 
 	int n, m, q;
-	n = m = q = 32;
+	scanf("%d", &n);
+	m = q = n;
 
 	Matrix A;
 	Matrix B;
@@ -128,6 +129,10 @@ int main() {
 	//printf("\n");
 
 	MatMul(A, B, C);
+
+	free(A.elements);
+	free(B.elements);
+	free(C.elements);
 
 	return 0;
 }
