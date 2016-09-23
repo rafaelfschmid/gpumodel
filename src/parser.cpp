@@ -10,7 +10,16 @@ using namespace std;
 #define SEGMENTS 1048576
 #endif
 
+#ifndef REPEAT
+#define REPEAT 10
+#endif
+
 int main(int argc, char **argv) {
+
+	if (argc < 3) {
+		printf("Parameters missing: <file input> <file output>\n\n");
+		return 0;
+	}
 
 	std::vector<std::vector<double> > matrix;
 	std::vector<double> segments;
@@ -21,13 +30,13 @@ int main(int argc, char **argv) {
 	if (input.is_open()) {
 		int k = 0;
 		while (getline(input, line)) {
-			cout << k++ << "\n";
+			//cout << k++ << "\n";
 			int size = stoi(line);
 
 			std::vector<double> times;
 			times.push_back(size);
-			cout << size << "\n";
-			for (int i = 0; i < 20; i++) {
+			//cout << size << "\n";
+			for (int i = 0; i < REPEAT; i++) {
 				getline(input, line);
 				//cout << line << "\n";
 				times.push_back(stod(line));
@@ -35,7 +44,7 @@ int main(int argc, char **argv) {
 			matrix.push_back(times);
 
 			getline(input, line);
-			cout << "\n";
+			//cout << "\n";
 		}
 		input.close();
 
@@ -48,13 +57,13 @@ int main(int argc, char **argv) {
 //			cout << "\n";
 		}*/
 
-		for (int k = 0; k < 20; k++) {
+		for (int k = 0; k < REPEAT; k++) {
 			for (int j = 0; j < matrix.size(); j++) {
 				output << std::fixed << matrix[j][k] << "\t";
-				cout << matrix[j][k] << ";";
+				//cout << matrix[j][k] << ";";
 			}
 			output << "\n";
-			cout << "\n";
+			//cout << "\n";
 		}
 		output.close();
 	}
