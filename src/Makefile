@@ -11,3 +11,5 @@ shared: shared.cu
 global: global.cu
 	nvcc $(gen) global.cu -o global.exe $(libs) $(params) -DELAPSED_TIME=$(TIME) -DEXECUTIONS=$(EXECS)
 
+generate: gen_equal.cpp
+	g++ -O3 gen_equal.cpp -o equal.exe -DEXP_BITS_SIZE=$(BITS) -DRAND

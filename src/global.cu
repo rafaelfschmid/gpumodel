@@ -28,6 +28,7 @@ typedef struct {
 __global__ void MatMulKernel(const Matrix, const Matrix, Matrix);
 
 void print(Matrix X) {
+//	std::cout << X.height << "\n"; std::cout << X.width << "\n";
 	for (int i = 0; i < X.height; i++) {
 		for (int j = 0; j < X.width; j++) {
 			std::cout << X.elements[i * X.width + j] << " ";
@@ -60,7 +61,7 @@ void MatMul(const Matrix A, const Matrix B, Matrix C) {
 	cudaMalloc(&d_C.elements, size);
 // Invoke kernel
 	dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE);
-	dim3 dimGrid(B.width / dimBlock.x, A.height / dimBlock.y);
+	dim3 dimGrid((B.width - 1) / dimBlock.x + 1, (A.height - 1) / dimBlock.y + 1);
 
 	cudaEvent_t start, stop;
 	cudaEventCreate(&start);
@@ -69,6 +70,9 @@ void MatMul(const Matrix A, const Matrix B, Matrix C) {
 	cudaEventRecord(start);
 	MatMulKernel<<<dimGrid, dimBlock>>>(d_A, d_B, d_C);
 	cudaEventRecord(stop);
+
+	// Read C from device memory
+		cudaMemcpy(C.elements, d_C.elements, size, cudaMemcpyDeviceToHost);
 
 	if (ELAPSED_TIME == 1) {
 		cudaEventSynchronize (stop);
@@ -80,9 +84,6 @@ void MatMul(const Matrix A, const Matrix B, Matrix C) {
 		print(C);
 	}
 
-// Read C from device memory
-	cudaMemcpy(C.elements, d_C.elements, size, cudaMemcpyDeviceToHost);
-
 // Free device memory
 	cudaFree(d_A.elements);
 	cudaFree(d_B.elements);
@@ -92,8 +93,11 @@ void MatMul(const Matrix A, const Matrix B, Matrix C) {
 int main() {
 
 	int n, m, q;
+
 	scanf("%d", &n);
-	m = q = n;
+	m = n;
+	q = n;
+	//printf("n=%d,m=%d,q=%d\n", n, m, q);
 
 	Matrix A;
 	Matrix B;
@@ -115,13 +119,11 @@ int main() {
 	C.elements = new float[sizeC];
 
 	srand(time(NULL));
-	for (int i = 0; i < A.height * A.width; i++) {
-		A.elements[i] = rand() % 10;
-	}
+	for (int i = 0; i < n*m; i++)
+		scanf("%f", &A.elements[i]);
 
-	for (int i = 0; i < B.height * B.width; i++) {
-		B.elements[i] = rand() % 10;
-	}
+	for (int i = 0; i < m*q; i++)
+		scanf("%f", &B.elements[i]);
 
 	//print(A);
 	//printf("\n");
@@ -144,7 +146,11 @@ __global__ void MatMulKernel(Matrix A, Matrix B, Matrix C) {
 	float Cvalue = 0;
 	int row = blockIdx.y * blockDim.y + threadIdx.y;
 	int col = blockIdx.x * blockDim.x + threadIdx.x;
-	for (int e = 0; e < A.width; ++e)
-		Cvalue += A.elements[row * A.width + e] * B.elements[e * B.width + col];
-	C.elements[row * C.width + col] = Cvalue;
+
+	//if(row < A.height && col < B.width)	{
+		for (int e = 0; e < A.width; ++e)
+			Cvalue += A.elements[row * A.width + e] * B.elements[e * B.width + col];
+		//printf("C[%d][%d] = %f", row, col, Cvalue);
+		C.elements[row * C.width + col] = Cvalue;
+	//}
 }
