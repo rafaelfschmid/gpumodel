@@ -149,9 +149,9 @@ int main() {
 	C.width = q;
 	C.elements = new float[sizeC];
 
-	srand (time(NULL));for
-(	int i = 0; i < n*m; i++)
-	scanf("%f", &A.elements[i]);
+	srand (time(NULL));
+	for(int i = 0; i < n*m; i++)
+		scanf("%f", &A.elements[i]);
 
 	for (int i = 0; i < m * q; i++)
 		scanf("%f", &B.elements[i]);
