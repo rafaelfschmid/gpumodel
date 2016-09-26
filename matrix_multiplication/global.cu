@@ -13,28 +13,24 @@
 
 #include <cuda.h>
 
+// Matrices are stored in row-major order:
+// M(row, col) = *(M.elements + row * M.width + col)
+typedef struct {
+	int width;
+	int height;
+	float* elements;
+} Matrix;
 
 // Thread block size
+#ifndef BLOCK_SIZE
 #define BLOCK_SIZE 16
+#endif
 
-// Matrix multiplication kernel called by MatMul()
-__global__ void mergesort_kernel(int n, int* v) {
-	int p, r;
-	int b = 1;
-	while (b < n) {
-		p = 0;
-		while (p + b < n) {
-			r = p + 2 * b;
-			if (r > n)
-				r = n;
-			intercala(p, p + b, r, v);
-			p = p + 2 * b;
-		}
-		b = 2 * b;
-	}
-}
+// Forward declaration of the matrix multiplication kernel
+__global__ void MatMulKernel(const Matrix, const Matrix, Matrix);
 
 void print(Matrix X) {
+//	std::cout << X.height << "\n"; std::cout << X.width << "\n";
 	for (int i = 0; i < X.height; i++) {
 		for (int j = 0; j < X.width; j++) {
 			std::cout << X.elements[i * X.width + j] << " ";
@@ -45,30 +41,29 @@ void print(Matrix X) {
 
 // Matrix multiplication - Host code
 // Matrix dimensions are assumed to be multiples of BLOCK_SIZE
-void mergesort(int n, int* v) {
+void MatMul(const Matrix A, const Matrix B, Matrix C) {
 // Load A and B to device memory
 	Matrix d_A;
-	d_A.width = d_A.stride = A.width;
+	d_A.width = A.width;
 	d_A.height = A.height;
 	size_t size = A.width * A.height * sizeof(float);
 	cudaMalloc(&d_A.elements, size);
 	cudaMemcpy(d_A.elements, A.elements, size, cudaMemcpyHostToDevice);
 	Matrix d_B;
-	d_B.width = d_B.stride = B.width;
+	d_B.width = B.width;
 	d_B.height = B.height;
 	size = B.width * B.height * sizeof(float);
-
 	cudaMalloc(&d_B.elements, size);
 	cudaMemcpy(d_B.elements, B.elements, size, cudaMemcpyHostToDevice);
 // Allocate C in device memory
 	Matrix d_C;
-	d_C.width = d_C.stride = C.width;
+	d_C.width = C.width;
 	d_C.height = C.height;
 	size = C.width * C.height * sizeof(float);
 	cudaMalloc(&d_C.elements, size);
 // Invoke kernel
 	dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE);
-	dim3 dimGrid(B.width / dimBlock.x, A.height / dimBlock.y);
+	dim3 dimGrid((B.width - 1) / dimBlock.x + 1, (A.height - 1) / dimBlock.y + 1);
 
 	cudaEvent_t start, stop;
 	cudaEventCreate(&start);
@@ -78,17 +73,18 @@ void mergesort(int n, int* v) {
 	MatMulKernel<<<dimGrid, dimBlock>>>(d_A, d_B, d_C);
 	cudaEventRecord(stop);
 
+	// Read C from device memory
+		cudaMemcpy(C.elements, d_C.elements, size, cudaMemcpyDeviceToHost);
+
 	if (ELAPSED_TIME == 1) {
-		cudaEventSynchronize(stop);
+		cudaEventSynchronize (stop);
 		float milliseconds = 0;
 		cudaEventElapsedTime(&milliseconds, start, stop);
 		std::cout << milliseconds << "\n";
-	} else {
+	}
+	else {
 		print(C);
 	}
-
-// Read C from device memory
-	cudaMemcpy(C.elements, d_C.elements, size, cudaMemcpyDeviceToHost);
 
 // Free device memory
 	cudaFree(d_A.elements);
@@ -99,7 +95,11 @@ void mergesort(int n, int* v) {
 int main() {
 
 	int n, m, q;
-	n = m = q = 32;
+
+	scanf("%d", &n);
+	m = n;
+	q = n;
+	//printf("n=%d,m=%d,q=%d\n", n, m, q);
 
 	Matrix A;
 	Matrix B;
@@ -121,21 +121,38 @@ int main() {
 	C.elements = new float[sizeC];
 
 	srand(time(NULL));
-	for (int i = 0; i < A.height * A.width; i++) {
-		A.elements[i] = rand() % 10;
-	}
+	for (int i = 0; i < n*m; i++)
+		scanf("%f", &A.elements[i]);
 
-	for (int i = 0; i < B.height * B.width; i++) {
-		B.elements[i] = rand() % 10;
-	}
+	for (int i = 0; i < m*q; i++)
+		scanf("%f", &B.elements[i]);
 
 	//print(A);
 	//printf("\n");
 	//print(B);
 	//printf("\n");
 
-	mergesort(A, B, C);
+	MatMul(A, B, C);
+
+	free(A.elements);
+	free(B.elements);
+	free(C.elements);
 
 	return 0;
 }
 
+// Matrix multiplication kernel called by MatMul()
+__global__ void MatMulKernel(Matrix A, Matrix B, Matrix C) {
+// Each thread computes one element of C
+// by accumulating results into Cvalue
+	float Cvalue = 0;
+	int row = blockIdx.y * blockDim.y + threadIdx.y;
+	int col = blockIdx.x * blockDim.x + threadIdx.x;
+
+	//if(row < A.height && col < B.width)	{
+		for (int e = 0; e < A.width; ++e)
+			Cvalue += A.elements[row * A.width + e] * B.elements[e * B.width + col];
+		//printf("C[%d][%d] = %f", row, col, Cvalue);
+		C.elements[row * C.width + col] = Cvalue;
+	//}
+}

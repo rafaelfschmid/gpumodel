@@ -23,7 +23,9 @@ typedef struct {
 } Matrix;
 
 // Thread block size
+#ifndef BLOCK_SIZE
 #define BLOCK_SIZE 16
+#endif
 
 // Get a matrix element
 __device__ float GetElement(const Matrix A, int row, int col) {
