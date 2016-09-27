@@ -52,8 +52,13 @@ __global__ void scan(float *g_odata, float *g_idata, int n) {
 		__syncthreads();
 	}
 
+	g_idata[globalIndex] = temp[localIndex];
+
 	if(localIndex == BLOCK_SIZE-1)
+	{
 		g_odata[blockIdx.x] = temp[localIndex]; // write output
+		//printf("block=%d | temp[%d]=%f\n", blockIdx.x, localIndex, temp[localIndex]);
+	}
 }
 
 __global__ void scan_block(float *g_odata, float *g_idata, int step, int n) {
@@ -116,17 +121,20 @@ void PrefixSum(float* odata, float* idata, const int n) {
 	float* g_idata;
 	float* g_odata;
 
-	size_t size = n * sizeof(float);
-	cudaMalloc(&g_idata, size);
-	cudaMalloc(&g_odata, size);
-
-	cudaMemcpy(g_idata, idata, size, cudaMemcpyHostToDevice);
-
-// Invoke kernel
+	// Invoke kernel
 	//dim3 dimBlock(BLOCK_SIZE);
 	//dim3 dimGrid(n / BLOCK_SIZE, 1);
 	int block = BLOCK_SIZE;
 	int grid = n / BLOCK_SIZE;
+
+	size_t size = n * sizeof(float);
+	size_t block_size = grid * sizeof(float);
+	cudaMalloc(&g_idata, size);
+	cudaMalloc(&g_odata, block_size);
+
+	cudaMemcpy(g_idata, idata, size, cudaMemcpyHostToDevice);
+
+
 
 	cudaEvent_t start, stop;
 	cudaEventCreate(&start);
@@ -143,7 +151,7 @@ void PrefixSum(float* odata, float* idata, const int n) {
 		printf("4: Async kernel error: %s\n", cudaGetErrorString(errAsync));
 
 	//for (int step = 0; step < grid; step++) {
-	scan_block<<<grid, block, block>>>(g_odata, g_idata, step, n);
+	/*scan_block<<<grid, block, block>>>(g_odata, g_idata, step, n);
 
 	errSync = cudaGetLastError();
 	errAsync = cudaDeviceSynchronize();
@@ -161,11 +169,11 @@ void PrefixSum(float* odata, float* idata, const int n) {
 	if (errAsync != cudaSuccess)
 		printf("4: Async kernel error: %s\n", cudaGetErrorString(errAsync));
 
-	}
+	}*/
 	cudaEventRecord(stop);
 
 	// Read C from device memory
-	cudaMemcpy(odata, g_odata, size, cudaMemcpyDeviceToHost);
+	cudaMemcpy(odata, g_odata, block_size, cudaMemcpyDeviceToHost);
 
 	if (ELAPSED_TIME == 1) {
 		cudaEventSynchronize(stop);
@@ -174,7 +182,7 @@ void PrefixSum(float* odata, float* idata, const int n) {
 		std::cout << milliseconds << "\n";
 	} else {
 		print(idata, n);
-		print(odata, n);
+		print(odata, grid);
 	}
 
 // Free device memory
