@@ -18,7 +18,7 @@
 #define BLOCK_SIZE 16
 #endif
 
-__global__ void scan(float *g_odata, float *g_idata, int n) {
+/*__global__ void scan(float *g_odata, float *g_idata, int n) {
 
 	extern __shared__ float temp[]; // allocated on invocation
 
@@ -34,9 +34,52 @@ __global__ void scan(float *g_odata, float *g_idata, int n) {
 		__syncthreads();
 	}
 	g_odata[globalIndex] = temp[localIndex]; // write output
+}*/
+
+__global__ void scan(float *g_odata, float *g_idata, int n) {
+
+	extern __shared__ float temp[]; // allocated on invocation
+
+	int globalIndex = blockIdx.x * blockDim.x + threadIdx.x;
+	int localIndex = threadIdx.x;
+
+	temp[localIndex] = g_idata[globalIndex];
+	__syncthreads();
+
+	for (int offset = 1; offset < BLOCK_SIZE; offset *= 2) {
+		if (localIndex >= offset)
+			temp[localIndex] += temp[localIndex - offset];
+		__syncthreads();
+	}
+
+	if(localIndex == BLOCK_SIZE-1)
+		g_odata[blockIdx.x] = temp[localIndex]; // write output
 }
 
 __global__ void scan_block(float *g_odata, float *g_idata, int step, int n) {
+
+	extern __shared__ float temp[]; // allocated on invocation
+
+	//int globalIndex = blockIdx.x * blockDim.x + blockDim.x * (threadIdx.x + step) + blockDim.x - 1;
+	int globalIndex = blockIdx.x * blockDim.x + blockDim.x * step + blockDim.x - 1;
+	int localIndex = threadIdx.x;
+
+	if(globalIndex < n-1) {
+		//printf("global value=%d, global index=%d\n", g_odata[globalIndex], globalIndex);
+		temp[localIndex] = g_odata[globalIndex];
+		__syncthreads();
+
+		for (int offset = 1; offset < BLOCK_SIZE; offset *= 2) {
+			if (localIndex >= offset)
+				temp[localIndex] += temp[localIndex - offset];
+			__syncthreads();
+		}
+
+		g_idata[globalIndex] = temp[localIndex]; // write output
+	}
+}
+
+__global__ void broadcast_sum(float *g_odata, float *g_idata, int step, int n) {
 
 	extern __shared__ float temp[]; // allocated on invocation
 
@@ -99,15 +142,24 @@ void PrefixSum(float* odata, float* idata, const int n) {
 	if (errAsync != cudaSuccess)
 		printf("4: Async kernel error: %s\n", cudaGetErrorString(errAsync));
 
-	for (int i = grid, step = 0; i > 0; i /= BLOCK_SIZE, step++) {
-		scan_block<<<grid, block, block>>>(g_odata, g_idata, step, n);
+	//for (int step = 0; step < grid; step++) {
+	scan_block<<<grid, block, block>>>(g_odata, g_idata, step, n);
 
-		errSync = cudaGetLastError();
-		errAsync = cudaDeviceSynchronize();
-		if (errSync != cudaSuccess)
-			printf("4: Sync kernel error: %s\n", cudaGetErrorString(errSync));
-		if (errAsync != cudaSuccess)
-			printf("4: Async kernel error: %s\n", cudaGetErrorString(errAsync));
+	errSync = cudaGetLastError();
+	errAsync = cudaDeviceSynchronize();
+	if (errSync != cudaSuccess)
+		printf("4: Sync kernel error: %s\n", cudaGetErrorString(errSync));
+	if (errAsync != cudaSuccess)
+		printf("4: Async kernel error: %s\n", cudaGetErrorString(errAsync));
+
+	broadcast_sum<<<grid, block, block>>>(g_odata, g_idata, step, n);
+
+	errSync = cudaGetLastError();
+	errAsync = cudaDeviceSynchronize();
+	if (errSync != cudaSuccess)
+		printf("4: Sync kernel error: %s\n", cudaGetErrorString(errSync));
+	if (errAsync != cudaSuccess)
+		printf("4: Async kernel error: %s\n", cudaGetErrorString(errAsync));
 
 	}
 	cudaEventRecord(stop);
