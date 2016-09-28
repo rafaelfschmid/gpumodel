@@ -6,5 +6,12 @@ PATH=${CUDA_HOME}/bin:${PATH}
 export TIME=1
 export EXECS=1
 export BITS=4
-export BLOCK=128
+#export BLOCK=2
+#export BLOCK=4
+#export BLOCK=8
+#export BLOCK=16
+#export BLOCK=32
+export BLOCK=64
+
+
 
