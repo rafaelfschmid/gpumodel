@@ -73,8 +73,15 @@ void MatMul(const Matrix A, const Matrix B, Matrix C) {
 	MatMulKernel<<<dimGrid, dimBlock>>>(d_A, d_B, d_C);
 	cudaEventRecord(stop);
 
+	cudaError_t errSync = cudaGetLastError();
+	cudaError_t errAsync = cudaDeviceSynchronize();
+	if (errSync != cudaSuccess)
+		printf("4: Sync kernel error: %s\n", cudaGetErrorString(errSync));
+	if (errAsync != cudaSuccess)
+		printf("4: Async kernel error: %s\n", cudaGetErrorString(errAsync));
+
 	// Read C from device memory
-		cudaMemcpy(C.elements, d_C.elements, size, cudaMemcpyDeviceToHost);
+	cudaMemcpy(C.elements, d_C.elements, size, cudaMemcpyDeviceToHost);
 
 	if (ELAPSED_TIME == 1) {
 		cudaEventSynchronize (stop);
