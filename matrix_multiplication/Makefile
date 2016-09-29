@@ -8,11 +8,11 @@ gen=-gencode arch=compute_20,code=sm_20 -gencode arch=compute_30,code=sm_30 -gen
 all: shared global generate parser
 
 shared: shared.cu
-	nvcc $(gen) $(caching) shared.cu -o shared2.exe $(libs) $(params) -DELAPSED_TIME=$(TIME) -DEXECUTIONS=$(EXECS) -DBLOCK_SIZE=2
-	nvcc $(gen) shared.cu -o shared4.exe $(libs) $(params) $(caching) -DELAPSED_TIME=$(TIME) -DEXECUTIONS=$(EXECS) -DBLOCK_SIZE=4
-	nvcc $(gen) shared.cu -o shared8.exe $(libs) $(params) $(caching) -DELAPSED_TIME=$(TIME) -DEXECUTIONS=$(EXECS) -DBLOCK_SIZE=8
-	nvcc $(gen) shared.cu -o shared16.exe $(libs) $(params) $(caching) -DELAPSED_TIME=$(TIME) -DEXECUTIONS=$(EXECS) -DBLOCK_SIZE=16
-	nvcc $(gen) shared.cu -o shared32.exe $(libs) $(params) $(caching) -DELAPSED_TIME=$(TIME) -DEXECUTIONS=$(EXECS) -DBLOCK_SIZE=32
+	nvcc $(gen) shared.cu -o shared2.exe $(libs) $(params) -DELAPSED_TIME=$(TIME) -DEXECUTIONS=$(EXECS) -DBLOCK_SIZE=2
+	nvcc $(gen) shared.cu -o shared4.exe $(libs) $(params) -DELAPSED_TIME=$(TIME) -DEXECUTIONS=$(EXECS) -DBLOCK_SIZE=4
+	nvcc $(gen) shared.cu -o shared8.exe $(libs) $(params) -DELAPSED_TIME=$(TIME) -DEXECUTIONS=$(EXECS) -DBLOCK_SIZE=8
+	nvcc $(gen) shared.cu -o shared16.exe $(libs) $(params) -DELAPSED_TIME=$(TIME) -DEXECUTIONS=$(EXECS) -DBLOCK_SIZE=16
+	nvcc $(gen) shared.cu -o shared32.exe $(libs) $(params) -DELAPSED_TIME=$(TIME) -DEXECUTIONS=$(EXECS) -DBLOCK_SIZE=32
 
 global: global.cu
 	nvcc $(gen) global.cu -o global2.exe $(libs) $(params) $(caching) -DELAPSED_TIME=$(TIME) -DEXECUTIONS=$(EXECS) -DBLOCK_SIZE=2
