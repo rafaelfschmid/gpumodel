@@ -21,12 +21,12 @@ void print(float* x, const int n) {
 // Matrix multiplication - Host code
 // Matrix dimensions are assumed to be multiples of BLOCK_SIZE
 void VectorSum(float* idata, const int n) {
-	int value = 0;
+	float value = 0;
 	for(int i = 0; i < n; i++){
 		value += idata[i];
 	}
 
-	printf("%f\n", value);
+	std::cout << value << "\n";
 }
 
 int main() {
@@ -34,7 +34,7 @@ int main() {
 	int n;
 	scanf("%d", &n);
 
-	float* idata, *odata;
+	float* idata;
 	int size = n * sizeof(float);
 	idata = new float[size];
 
