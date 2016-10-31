@@ -14,9 +14,9 @@
 #include <cuda.h>
 
 // Thread block size
-#ifndef BLOCK_SIZE
-#define BLOCK_SIZE 32
-#endif
+//#ifndef BLOCK_SIZE
+//#define BLOCK_SIZE 32
+//#endif
 
 __global__ void vec_sum(float *g_odata, float *g_idata, int n) {
 
@@ -27,11 +27,12 @@ __global__ void vec_sum(float *g_odata, float *g_idata, int n) {
 
 	temp[localIndex] = g_idata[globalIndex];
 	__syncthreads();
+	printf("temp[%d]=%f | global[%d]=%f\n", localIndex, temp[localIndex], globalIndex, temp[globalIndex]);
 
 	for (int offset = BLOCK_SIZE/2; offset >= 1; offset /= 2) {
 		if ( (localIndex < offset) && (globalIndex + offset < n) ) {
-			temp[localIndex] += temp[localIndex + offset];
 			//printf("block=%d | offset=%d | temp[%d]=%f | temp[%d]=%f\n", blockIdx.x, offset, localIndex, temp[localIndex], localIndex+offset, temp[localIndex+offset]);
+			temp[localIndex] += temp[localIndex + offset];
 		}
 		__syncthreads();
 	}
@@ -44,7 +45,7 @@ __global__ void vec_sum(float *g_odata, float *g_idata, int n) {
 
 void print(float* x, const int n) {
 	for (int i = 0; i < n; i++) {
-		std::cout << x[i] << " ";
+		std::cout << x[i]; // << " ";
 	}
 	std::cout << "\n";
 }

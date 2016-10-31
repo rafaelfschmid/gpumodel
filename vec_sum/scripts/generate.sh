@@ -2,7 +2,7 @@
 dir=$1
 
 c=32
-while [ $c -le 2097120 ]
+while [ $c -le 67107840 ]
 do
 #	echo $c
 #	for b in `seq 1 10`; do

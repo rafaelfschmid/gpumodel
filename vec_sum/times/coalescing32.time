@@ -1,0 +1,302 @@
+32
+0.02768
+0.024512
+0.022048
+0.028704
+0.025664
+0.0264
+0.024064
+0.0336
+0.019904
+0.020192
+ 
+64
+0.03296
+0.040032
+0.04432
+0.035744
+0.035648
+0.035776
+0.035968
+0.033088
+0.032128
+0.030624
+ 
+128
+0.03568
+0.032032
+0.029984
+0.075328
+0.031424
+0.03056
+0.030816
+0.030912
+0.030432
+0.032672
+ 
+256
+0.051808
+0.037504
+0.039552
+0.043136
+0.046464
+0.043584
+0.044096
+0.04352
+0.04592
+0.041792
+ 
+512
+0.042016
+0.04576
+0.046912
+0.044064
+0.043296
+0.041024
+0.04416
+0.064544
+0.0448
+0.042464
+ 
+1024
+0.047808
+0.03776
+0.035232
+0.043744
+0.045536
+0.046048
+0.076544
+0.04448
+0.04368
+0.043552
+ 
+2048
+0.05616
+0.05648
+0.056896
+0.058656
+0.053376
+0.05056
+0.048768
+0.05088
+0.056864
+0.056544
+ 
+4096
+0.063808
+0.06512
+0.0648
+0.059712
+0.036736
+0.054464
+0.063296
+0.06224
+0.062016
+0.06176
+ 
+8192
+0.063744
+0.101408
+0.074464
+0.082144
+0.078016
+0.082848
+0.075744
+0.070752
+0.075104
+0.078432
+ 
+16384
+0.09264
+0.099872
+0.095904
+0.096032
+0.095168
+0.087456
+0.11216
+0.08304
+0.07872
+0.100832
+ 
+32768
+0.147328
+0.141792
+0.158784
+0.145312
+0.14672
+0.151168
+0.152928
+0.159456
+0.159328
+0.155136
+ 
+65536
+0.269472
+0.267904
+0.266464
+0.268512
+0.267584
+0.27024
+0.267552
+0.268384
+0.262944
+0.267456
+ 
+131072
+0.48864
+0.484704
+0.483008
+0.485504
+0.48832
+0.484672
+0.489728
+0.488512
+0.488544
+0.48576
+ 
+262144
+0.930272
+0.931296
+0.93392
+0.932544
+0.937088
+0.934336
+0.93552
+0.931296
+0.929056
+0.932608
+ 
+524288
+1.81878
+1.82086
+1.8209
+1.82
+1.82125
+1.82208
+1.81962
+1.81952
+1.82931
+1.81872
+ 
+1048576
+3.60531
+3.60118
+3.60368
+3.60157
+3.60474
+4.31744
+3.60224
+3.60246
+3.60202
+3.60246
+ 
+2097152
+4: Sync kernel error: invalid configuration argument
+0.275136
+4: Sync kernel error: invalid configuration argument
+0.274336
+4: Sync kernel error: invalid configuration argument
+0.291648
+4: Sync kernel error: invalid configuration argument
+0.275744
+4: Sync kernel error: invalid configuration argument
+0.275552
+4: Sync kernel error: invalid configuration argument
+0.274656
+4: Sync kernel error: invalid configuration argument
+0.275744
+4: Sync kernel error: invalid configuration argument
+0.277856
+4: Sync kernel error: invalid configuration argument
+0.275584
+4: Sync kernel error: invalid configuration argument
+0.275712
+ 
+4194304
+4: Sync kernel error: invalid configuration argument
+0.49824
+4: Sync kernel error: invalid configuration argument
+0.499264
+4: Sync kernel error: invalid configuration argument
+0.497632
+4: Sync kernel error: invalid configuration argument
+0.497856
+4: Sync kernel error: invalid configuration argument
+0.49872
+4: Sync kernel error: invalid configuration argument
+0.498592
+4: Sync kernel error: invalid configuration argument
+0.5008
+4: Sync kernel error: invalid configuration argument
+0.498848
+4: Sync kernel error: invalid configuration argument
+0.498784
+4: Sync kernel error: invalid configuration argument
+0.498016
+ 
+8388608
+4: Sync kernel error: invalid configuration argument
+0.941888
+4: Sync kernel error: invalid configuration argument
+0.96768
+4: Sync kernel error: invalid configuration argument
+0.942656
+4: Sync kernel error: invalid configuration argument
+0.942912
+4: Sync kernel error: invalid configuration argument
+0.943616
+4: Sync kernel error: invalid configuration argument
+0.94512
+4: Sync kernel error: invalid configuration argument
+0.943072
+4: Sync kernel error: invalid configuration argument
+0.941984
+4: Sync kernel error: invalid configuration argument
+0.941504
+4: Sync kernel error: invalid configuration argument
+0.943552
+ 
+16777216
+4: Sync kernel error: invalid configuration argument
+1.83286
+4: Sync kernel error: invalid configuration argument
+1.85126
+4: Sync kernel error: invalid configuration argument
+1.83347
+4: Sync kernel error: invalid configuration argument
+1.85162
+4: Sync kernel error: invalid configuration argument
+1.84934
+4: Sync kernel error: invalid configuration argument
+1.85056
+4: Sync kernel error: invalid configuration argument
+1.85325
+4: Sync kernel error: invalid configuration argument
+1.85408
+4: Sync kernel error: invalid configuration argument
+1.83347
+4: Sync kernel error: invalid configuration argument
+1.83322
+ 
+33554432
+4: Sync kernel error: invalid configuration argument
+3.61792
+4: Sync kernel error: invalid configuration argument
+3.61744
+4: Sync kernel error: invalid configuration argument
+3.63149
+4: Sync kernel error: invalid configuration argument
+3.63296
+4: Sync kernel error: invalid configuration argument
+3.64573
+4: Sync kernel error: invalid configuration argument
+3.62061
+4: Sync kernel error: invalid configuration argument
+3.62435
+4: Sync kernel error: invalid configuration argument
+3.63363
+4: Sync kernel error: invalid configuration argument
+3.63606
+4: Sync kernel error: invalid configuration argument
+3.63184
+ 

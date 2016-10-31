@@ -45,7 +45,7 @@ __global__ void vec_sum(float *g_odata, float *g_idata, int n) {
 
 void print(float* x, const int n) {
 	for (int i = 0; i < n; i++) {
-		std::cout << x[i] << " ";
+		std::cout << x[i]; // << " ";
 	}
 	std::cout << "\n";
 }
