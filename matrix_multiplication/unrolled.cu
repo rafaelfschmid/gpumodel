@@ -149,9 +149,9 @@ int main() {
 	C.width = q;
 	C.elements = new float[sizeC];
 
-	srand (time(NULL));
-	for(int i = 0; i < n*m; i++)
-		scanf("%f", &A.elements[i]);
+	srand (time(NULL));for
+(	int i = 0; i < n*m; i++)
+	scanf("%f", &A.elements[i]);
 
 	for (int i = 0; i < m * q; i++)
 		scanf("%f", &B.elements[i]);
@@ -185,39 +185,80 @@ __global__ void MatMulKernel(Matrix A, Matrix B, Matrix C) {
 	int col = threadIdx.x;
 
 	//if ((blockRow * blockDim.y + row < C.height) && (blockCol * blockDim.x + col < C.width)) {
-		// Loop over all the sub-matrices of A and B that are
-		// required to compute Csub
-		// Multiply each pair of sub-matrices together
-		// and accumulate the results
-		for (int m = 0; m < (A.width / BLOCK_SIZE); ++m) {
-			// Get sub-matrix Asub of A
-			Matrix Asub = GetSubMatrix(A, blockRow, m);
-			// Get sub-matrix Bsub of B
-			Matrix Bsub = GetSubMatrix(B, m, blockCol);
-			// Shared memory used to store Asub and Bsub respectively
-			__shared__ float As[BLOCK_SIZE][BLOCK_SIZE];
-			__shared__ float Bs[BLOCK_SIZE][BLOCK_SIZE];
+	// Loop over all the sub-matrices of A and B that are
+	// required to compute Csub
+	// Multiply each pair of sub-matrices together
+	// and accumulate the results
+	for (int m = 0; m < (A.width / BLOCK_SIZE); ++m) {
+		// Get sub-matrix Asub of A
+		Matrix Asub = GetSubMatrix(A, blockRow, m);
+		// Get sub-matrix Bsub of B
+		Matrix Bsub = GetSubMatrix(B, m, blockCol);
+		// Shared memory used to store Asub and Bsub respectively
+		__shared__ float As[BLOCK_SIZE][BLOCK_SIZE];
+		__shared__ float Bs[BLOCK_SIZE][BLOCK_SIZE];
+		// Load Asub and Bsub from device memory to shared memory
+		// Each thread loads one element of each sub-matrix
+		As[row][col] = GetElement(Asub, row, col);
+		Bs[row][col] = GetElement(Bsub, row, col);
+		// Synchronize to make sure the sub-matrices are loaded
+		// before starting the computation
+		__syncthreads();
 
-			// Load Asub and Bsub from device memory to shared memory
-			// Each thread loads one element of each sub-matrix
-			As[row][col] = GetElement(Asub, row, col);
-			Bs[row][col] = GetElement(Bsub, row, col);
-			// Synchronize to make sure the sub-matrices are loaded
-			// before starting the computation
-			__syncthreads();
+		// Multiply Asub and Bsub together
+		//for (int e = 0; e < BLOCK_SIZE; ++e)
+		Cvalue += As[row][0] * Bs[0][col];
+		Cvalue += As[row][1] * Bs[1][col];
+		// Thread block size
+#if BLOCK_SIZE > 2
+		Cvalue += As[row][2] * Bs[2][col];
+		Cvalue += As[row][3] * Bs[3][col];
+#endif
 
-			// Multiply Asub and Bsub together
-			for (int e = 0; e < BLOCK_SIZE; ++e) {
-				Cvalue += As[row][e] * Bs[e][col];
-			}
-			// Synchronize to make sure that the preceding
-			// computation is done before loading two new
-			// sub-matrices of A and B in the next iteration
-			__syncthreads();
-		}
+#if BLOCK_SIZE > 4
+		Cvalue += As[row][4] * Bs[4][col];
+		Cvalue += As[row][5] * Bs[5][col];
+		Cvalue += As[row][6] * Bs[6][col];
+		Cvalue += As[row][7] * Bs[7][col];
+#endif
+#if BLOCK_SIZE > 8
+		Cvalue += As[row][8] * Bs[8][col];
+		Cvalue += As[row][9] * Bs[9][col];
+		Cvalue += As[row][10] * Bs[10][col];
+		Cvalue += As[row][11] * Bs[11][col];
+		Cvalue += As[row][12] * Bs[12][col];
+		Cvalue += As[row][13] * Bs[13][col];
+		Cvalue += As[row][14] * Bs[14][col];
+		Cvalue += As[row][15] * Bs[15][col];
+#endif
 
-		// Write Csub to device memory
-		// Each thread writes one element
-		SetElement(Csub, row, col, Cvalue);
+#if BLOCK_SIZE > 16
+		Cvalue += As[row][16] * Bs[16][col];
+		Cvalue += As[row][17] * Bs[17][col];
+		Cvalue += As[row][18] * Bs[18][col];
+		Cvalue += As[row][19] * Bs[19][col];
+		Cvalue += As[row][20] * Bs[20][col];
+		Cvalue += As[row][21] * Bs[21][col];
+		Cvalue += As[row][22] * Bs[22][col];
+		Cvalue += As[row][23] * Bs[23][col];
+		Cvalue += As[row][24] * Bs[24][col];
+		Cvalue += As[row][25] * Bs[25][col];
+		Cvalue += As[row][26] * Bs[26][col];
+		Cvalue += As[row][27] * Bs[27][col];
+		Cvalue += As[row][28] * Bs[28][col];
+		Cvalue += As[row][29] * Bs[29][col];
+		Cvalue += As[row][30] * Bs[30][col];
+		Cvalue += As[row][31] * Bs[31][col];
+#endif
+
+		// Synchronize to make sure that the preceding
+		// computation is done before loading two new
+		// sub-matrices of A and B in the next iteration
+		__syncthreads();
+	}
+
+	// Write Csub to device memory
+	// Each thread writes one element
+	SetElement(Csub, row, col, Cvalue);
 	//}
 }
