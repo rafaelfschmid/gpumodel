@@ -4,6 +4,8 @@ dir1=$2 #test files dir
 dir2=$3 #result files dir
 dir3=$4 #errors files dir
 
+echo $prog1
+
 for filename in `ls -tr $dir1`; do
 	file=$filename
 	file=$(echo $file| cut -d'/' -f 3)
@@ -14,7 +16,7 @@ for filename in `ls -tr $dir1`; do
 
 	if ! cmp -s $dir2/"test.out" $dir2/$c".out"; then
 		mkdir -p $dir3
-		cat $dir2/"test.out" > $dir3/$c".out"
+		cat $dir2/"test.out" > $dir3/$prog1"_"$c".out"
 		echo "There are something wrong."
 		#break;
 	else

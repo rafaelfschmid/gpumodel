@@ -1,0 +1,94 @@
+32
+0.179744
+0.160896
+0.163104
+0.163008
+0.159712
+0.171968
+0.15616
+0.158048
+0.157344
+0.156704
+ 
+64
+1.09216
+1.09222
+1.09206
+1.09136
+1.09194
+1.09245
+1.09142
+1.09216
+1.09197
+1.09123
+ 
+128
+9.73795
+9.73741
+9.73606
+9.73338
+9.73494
+9.74739
+9.73933
+9.7449
+9.7433
+9.73488
+ 
+256
+95.2595
+95.2584
+95.2919
+95.2996
+95.2996
+95.2806
+95.2539
+95.2851
+95.2604
+95.2272
+ 
+512
+776.427
+692.518
+678.466
+678.886
+678.815
+678.772
+678.831
+679.07
+678.779
+678.807
+ 
+1024
+6451.45
+6451.39
+6451.67
+6451.43
+6451.39
+6451.68
+6451.44
+6451.46
+6451.41
+6451.37
+ 
+2048
+4: Async kernel error: the launch timed out and was terminated
+0
+4: Async kernel error: the launch timed out and was terminated
+0
+4: Async kernel error: the launch timed out and was terminated
+0
+4: Async kernel error: the launch timed out and was terminated
+0
+4: Async kernel error: the launch timed out and was terminated
+0
+4: Async kernel error: the launch timed out and was terminated
+0
+4: Async kernel error: the launch timed out and was terminated
+0
+4: Async kernel error: the launch timed out and was terminated
+0
+4: Async kernel error: the launch timed out and was terminated
+0
+4: Async kernel error: the launch timed out and was terminated
+0
+ 
