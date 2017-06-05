@@ -23,7 +23,7 @@ dir=$1
 ./scripts/exec.sh shared32.exe ~/workspace/files/gpumodel/inputs > $dir/shared32.out 
 ./scripts/exec.sh global32.exe ~/workspace/files/gpumodel/inputs > $dir/global32.out
 ./scripts/exec.sh unrolled32.exe ~/workspace/files/gpumodel/inputs > $dir/unrolled32.out
-./scripts/exec.sh prefetching32.exe ~/workspace/files/gpumodel/inputs > $dir/prefecthing32.out
+./scripts/exec.sh prefetching32.exe ~/workspace/files/gpumodel/inputs > $dir/prefetching32.out
 
 
 #./scripts/exec.sh shared64.exe ~/workspace/files/gpumodel/inputs > times-lmcad/shared64.out 
