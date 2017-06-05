@@ -4,11 +4,8 @@
 #include <vector>
 #include <stdlib.h>
 #include <string>
-using namespace std;
 
-#ifndef SEGMENTS
-#define SEGMENTS 1048576
-#endif
+using namespace std;
 
 #ifndef REPEAT
 #define REPEAT 10
