@@ -25,6 +25,7 @@ typedef struct {
 // Thread block size
 #ifndef BLOCK_SIZE
 #define BLOCK_SIZE 16
+#define BLOCK_SIZE_2 BLOCK_SIZE * BLOCK_SIZE
 #endif
 
 // Get a matrix element
@@ -85,7 +86,7 @@ void MatMul(const Matrix A, const Matrix B, Matrix C) {
 	size = C.width * C.height * sizeof(float);
 	cudaMalloc(&d_C.elements, size);
 // Invoke kernel
-	dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE);
+	dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE_2);
 	//dim3 dimGrid(B.width / dimBlock.x, A.height / dimBlock.y);
 	dim3 dimGrid((B.width - 1) / dimBlock.x + 1,
 			(A.height - 1) / dimBlock.y + 1);
