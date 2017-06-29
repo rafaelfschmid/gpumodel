@@ -1,0 +1,46 @@
+==2648== NVPROF is profiling process 2648, command: ./global_uni8.exe
+==2648== Some kernel(s) will be replayed on device 0 in order to collect all events/metrics.
+==2648== Profiling application: ./global_uni8.exe
+==2648== Profiling result:
+==2648== Metric result:
+"Device","Kernel","Invocations","Metric Name","Metric Description","Min","Max","Avg"
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"gld_efficiency","Global Memory Load Efficiency",25.000000%,25.000000%,25.000000%
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"gst_efficiency","Global Memory Store Efficiency",100.000000%,100.000000%,100.000000%
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"sm_efficiency","Multiprocessor Activity",99.996611%,99.996611%,99.996611%
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"achieved_occupancy","Achieved Occupancy",0.166549,0.166549,0.166549
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"inst_executed","Instructions Executed",1480589312,1480589312,1480589312
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"ipc_instance","Executed IPC",0.392698,0.392698,0.392698
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"inst_per_warp","Instructions per warp",11296.000000,11296.000000,11296.000000
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"ldst_executed","Executed Load/Store Instructions",268566528,268566528,268566528
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"warp_execution_efficiency","Warp Execution Efficiency",25.000000%,25.000000%,25.000000%
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"inst_replay_overhead","Instruction Replay Overhead",0.746997,0.746997,0.746997
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"gld_transactions","Global Load Transactions",268435456,268435456,268435456
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"gst_transactions","Global Store Transactions",131072,131072,131072
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"gld_transactions_per_request","Global Load Transactions Per Request",1.000000,1.000000,1.000000
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"gst_transactions_per_request","Global Store Transactions Per Request",1.000000,1.000000,1.000000
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"gld_throughput","Global Load Throughput",13.445855GB/s,13.445855GB/s,13.445504GB/s
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"gst_throughput","Global Store Throughput",1.680732MB/s,1.680732MB/s,976.562500KB/s
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"dram_read_transactions","Device Memory Read Transactions",67601136,67601136,67601136
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"dram_write_transactions","Device Memory Write Transactions",131086,131086,131086
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"dram_read_throughput","Device Memory Read Throughput",866.847093MB/s,866.847093MB/s,865.936279MB/s
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"dram_write_throughput","Device Memory Write Throughput",1.680911MB/s,1.680911MB/s,976.562500KB/s
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"shared_load_transactions","Shared Load Transactions",0,0,0
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"shared_store_transactions","Shared Store Transactions",0,0,0
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"shared_load_transactions_per_request","Shared Memory Load Transactions Per Request",0.000000,0.000000,0.000000
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"shared_store_transactions_per_request","Shared Memory Store Transactions Per Request",0.000000,0.000000,0.000000
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l1_cache_global_hit_rate","L1 Global Hit Rate",87.332287%,87.332287%,87.332287%
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_read_transactions","L2 Read Transactions",136635155,136635155,136635155
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_write_transactions","L2 Write Transactions",131083,131083,131083
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_read_throughput","L2 Throughput (Reads)",1.711004GB/s,1.711004GB/s,1.710840GB/s
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_write_throughput","L2 Throughput (Writes)",1.680872MB/s,1.680872MB/s,976.562500KB/s
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_l1_read_hit_rate","L2 Hit Rate (L1 Reads)",49.960902%,49.960902%,49.960902%
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_l1_read_throughput","L2 Throughput (L1 Reads)",1.712056GB/s,1.712056GB/s,1.711771GB/s
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l1_shared_utilization","L1/Shared Memory Utilization","Low (1)","Low (1)","Low (1)"
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_utilization","L2 Cache Utilization","Low (1)","Low (1)","Low (1)"
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"stall_exec_dependency","Issue Stall Reasons (Execution Dependency)",50.994319%,50.994319%,50.994319%
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"stall_other","Issue Stall Reasons (Other)",13.902685%,13.902685%,13.902685%
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"alu_fu_utilization","Arithmetic Function Unit Utilization","Low (2)","Low (2)","Low (2)"
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"ldst_fu_utilization","Load/Store Function Unit Utilization","Low (2)","Low (2)","Low (2)"
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"dram_utilization","Device Memory Utilization","Low (1)","Low (1)","Low (1)"
+"GeForce GT 630M (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"stall_memory_dependency","Issue Stall Reasons (Data Request)",28.603633%,28.603633%,28.603633%
+

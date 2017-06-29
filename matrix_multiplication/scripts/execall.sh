@@ -2,8 +2,8 @@
 input=$1 #arquivos de entrada
 time=$2 #arquivos de tempo
 
-./scripts/exec_unidimensional.sh $input $time
-./scripts/exec_tridimensional.sh $input $time
+#./scripts/exec_unidimensional.sh $input $time
+#./scripts/exec_tridimensional.sh $input $time
 
 #./scripts/exec.sh shared2.exe $input > $time/shared2.out 
 #./scripts/exec.sh global_bi2.exe $input > $time/global_bi2.out
