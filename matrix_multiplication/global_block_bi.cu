@@ -201,7 +201,7 @@ __global__ void MatMulKernel(Matrix A, Matrix B, Matrix C) {
 		// Synchronize to make sure that the preceding
 		// computation is done before loading two new
 		// sub-matrices of A and B in the next iteration
-		__syncthreads();
+		//__syncthreads();
 	}
 
 	// Write Csub to device memory
