@@ -1,39 +1,39 @@
-==752== NVPROF is profiling process 752, command: ./global_block16.exe
-==752== Some kernel(s) will be replayed on device 0 in order to collect all events/metrics.
-==752== Profiling application: ./global_block16.exe
-==752== Profiling result:
-==752== Metric result:
+==14196== NVPROF is profiling process 14196, command: ./global_block16.exe
+==14196== Some kernel(s) will be replayed on device 0 in order to collect all events/metrics.
+==14196== Profiling application: ./global_block16.exe
+==14196== Profiling result:
+==14196== Metric result:
 "Device","Kernel","Invocations","Metric Name","Metric Description","Min","Max","Avg"
 "GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"gld_efficiency","Global Memory Load Efficiency",56.250000%,56.250000%,56.250000%
 "GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"gst_efficiency","Global Memory Store Efficiency",100.000000%,100.000000%,100.000000%
-"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"sm_efficiency","Multiprocessor Activity",99.712075%,99.712075%,99.712075%
-"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"achieved_occupancy","Achieved Occupancy",0.747393,0.747393,0.747393
-"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"inst_executed","Instructions Executed",213123072,213123072,213123072
-"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"ipc_instance","Executed IPC",0.872729,0.872729,0.872729
-"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"inst_per_warp","Instructions per warp",6504.000000,6504.000000,6504.000000
-"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"ldst_executed","Executed Load/Store Instructions",67173612,67173612,67173612
-"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"inst_replay_overhead","Instruction Replay Overhead",0.514161,0.514161,0.514161
+"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"sm_efficiency","Multiprocessor Activity",99.829399%,99.829399%,99.829399%
+"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"achieved_occupancy","Achieved Occupancy",0.679358,0.679358,0.679358
+"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"inst_executed","Instructions Executed",208044032,208044032,208044032
+"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"ipc_instance","Executed IPC",0.852055,0.852055,0.852055
+"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"inst_per_warp","Instructions per warp",6349.000000,6349.000000,6349.000000
+"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"ldst_executed","Executed Load/Store Instructions",67174400,67174400,67174400
+"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"inst_replay_overhead","Instruction Replay Overhead",0.514287,0.514287,0.514287
 "GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"gld_transactions","Global Load Transactions",100663296,100663296,100663296
 "GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"gst_transactions","Global Store Transactions",65536,65536,65536
 "GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"gld_transactions_per_request","Global Load Transactions Per Request",1.500000,1.500000,1.500000
 "GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"gst_transactions_per_request","Global Store Transactions Per Request",2.000000,2.000000,2.000000
-"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"gld_throughput","Global Load Throughput",152.146664GB/s,152.146664GB/s,152.146444GB/s
-"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"gst_throughput","Global Store Throughput",152.146664MB/s,152.146664MB/s,151.634216MB/s
-"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"dram_read_transactions","Device Memory Read Transactions",8639965,8639965,8639965
+"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"gld_throughput","Global Load Throughput",163.377530GB/s,163.377530GB/s,163.377263GB/s
+"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"gst_throughput","Global Store Throughput",163.377529MB/s,163.377529MB/s,163.078308MB/s
+"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"dram_read_transactions","Device Memory Read Transactions",14375993,14375993,14375993
 "GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"dram_write_transactions","Device Memory Write Transactions",131072,131072,131072
-"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"dram_read_throughput","Device Memory Read Throughput",9.794100GB/s,9.794100GB/s,9.793788GB/s
-"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"dram_write_throughput","Device Memory Write Throughput",152.146664MB/s,152.146664MB/s,151.634216MB/s
+"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"dram_read_throughput","Device Memory Read Throughput",17.499285GB/s,17.499285GB/s,17.498620GB/s
+"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"dram_write_throughput","Device Memory Write Throughput",163.377529MB/s,163.377529MB/s,163.078308MB/s
 "GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"shared_load_transactions","Shared Load Transactions",0,0,0
 "GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"shared_store_transactions","Shared Store Transactions",0,0,0
 "GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"shared_load_transactions_per_request","Shared Memory Load Transactions Per Request",0.000000,0.000000,0.000000
 "GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"shared_store_transactions_per_request","Shared Memory Store Transactions Per Request",0.000000,0.000000,0.000000
 "GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l1_cache_global_hit_rate","L1 Global Hit Rate",0.000000%,0.000000%,0.000000%
-"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_read_transactions","L2 Read Transactions",134217796,134217796,134217796
-"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_write_transactions","L2 Write Transactions",131078,131078,131078
-"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_read_throughput","L2 Throughput (Reads)",152.146741GB/s,152.146741GB/s,152.146444GB/s
-"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_write_throughput","L2 Throughput (Writes)",152.153628MB/s,152.153628MB/s,151.634216MB/s
-"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_l1_read_hit_rate","L2 Hit Rate (L1 Reads)",93.585560%,93.585560%,93.585560%
-"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_l1_read_throughput","L2 Throughput (L1 Reads)",152.146664GB/s,152.146664GB/s,152.146444GB/s
+"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_read_transactions","L2 Read Transactions",134217792,134217792,134217792
+"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_write_transactions","L2 Write Transactions",131104,131104,131104
+"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_read_throughput","L2 Throughput (Reads)",163.377608GB/s,163.377608GB/s,163.377263GB/s
+"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_write_throughput","L2 Throughput (Writes)",163.417417MB/s,163.417417MB/s,163.078308MB/s
+"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_l1_read_hit_rate","L2 Hit Rate (L1 Reads)",89.531466%,89.531466%,89.531466%
+"GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_l1_read_throughput","L2 Throughput (L1 Reads)",163.377530GB/s,163.377530GB/s,163.377263GB/s
 "GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l1_shared_utilization","L1/Shared Memory Utilization","Low (1)","Low (1)","Low (1)"
 "GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"l2_utilization","L2 Cache Utilization","Low (3)","Low (3)","Low (3)"
 "GeForce GTX 770 (0)","MatMulKernel(Matrix, Matrix, Matrix)",1,"alu_fu_utilization","Arithmetic Function Unit Utilization","Low (2)","Low (2)","Low (2)"
